@@ -6,27 +6,25 @@ class ReportsController < ApplicationController
     @reports = Report.includes(:authors).all
   end
 
-  def show
-  end
+  def show; end
 
   def new
     @report = Report.new
   end
 
   def create
-    @report = Report.new(report_params)
-    @report.authors = Author.where(id: params[:report][:author_ids])
+    report = Report.new(report_params)
+    report.authors = Author.where(id: params[:report][:author_ids])
 
-    if @report.save
-      redirect_to @report, notice: "Доклад успешно создан"
+    if report.save
+      redirect_to report, notice: "Доклад успешно создан"
     else
       load_authors
       render :new
     end
   end
 
-  def edit
-  end
+  def edit; end
 
   def update
     @report.authors = Author.where(id: params[:report][:author_ids])

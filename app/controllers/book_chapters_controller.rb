@@ -7,27 +7,25 @@ class BookChaptersController < ApplicationController
     @book_chapters = BookChapter.includes(:authors).all
   end
 
-  def show
-  end
+  def show; end
 
   def new
     @book_chapter = BookChapter.new
   end
 
   def create
-    @book_chapter = BookChapter.new(book_chapter_params)
-    @book_chapter.authors = Author.where(id: params[:book_chapter][:author_ids])
+    book_chapter = BookChapter.new(book_chapter_params)
+    book_chapter.authors = Author.where(id: params[:book_chapter][:author_ids])
 
-    if @book_chapter.save
-      redirect_to @book_chapter, notice: "Глава книги успешно создана"
+    if book_chapter.save
+      redirect_to book_chapter, notice: "Глава книги успешно создана"
     else
       load_authors
       render :new
     end
   end
 
-  def edit
-  end
+  def edit; end
 
   def update
     @book_chapter.authors = Author.where(id: params[:book_chapter][:author_ids])

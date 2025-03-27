@@ -10,12 +10,15 @@ class ArticlesController < ApplicationController
     @article = Article.new
   end
 
-  def create
-    @article = Article.new(article_params)
-    @article.authors = Author.where(id: params[:article][:author_ids])
+  def show; end
 
-    if @article.save
-      redirect_to @article, notice: "Статья успешно создана"
+
+  def create
+    article = Article.new(article_params)
+    article.authors = Author.where(id: params[:article][:author_ids])
+
+    if article.save
+      redirect_to article, notice: "Статья успешно создана"
     else
       load_resources
       render :new
