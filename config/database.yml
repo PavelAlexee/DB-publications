@@ -9,7 +9,7 @@ default: &default
 
 development:
   <<: *default
-  database: storage/development.sqlite3
+  database: database_publications_development
 
 test:
   <<: *default
